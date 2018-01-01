@@ -12,9 +12,9 @@ const schema = Joi.array().items(
   }),
 )
 
-const reverseBookYearComparator = (l, r) => {
-  if (l.year < r.year) return 1
-  if (l.year > r.year) return -1
+const reverseYearComparator = (l, r) => {
+  if (l < r) return 1
+  if (l > r) return -1
 
   return 0
 }
@@ -31,18 +31,14 @@ const parseBooks = bookStr => {
   }
 
   const years = new Set(
-    value.sort(reverseBookYearComparator).map(book => book.year),
+    value.map(book => book.year).sort(reverseYearComparator),
   )
 
-  const sections = value.sort(reverseBookYearComparator).reduce((acc, next) => {
-    return tap(acc, acc => {
-      if (!acc.has(next.year)) {
-        acc.set(next.year, [])
-      }
+  const sections = new Map()
 
-      acc.get(next.year).push(next)
-    })
-  }, new Map())
+  // insert the years in sorted order
+  years.forEach(year => sections.set(year, []))
+  value.forEach(book => sections.get(book.year).push(book))
 
   return {
     years,

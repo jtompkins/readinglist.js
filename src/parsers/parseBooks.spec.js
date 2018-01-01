@@ -9,12 +9,17 @@ const SAMPLE_INPUT = `
     "link":
       "https://test.com/book2016"
   },
-
   {
-    "title": "Test Book 2017",
+    "title": "Test Book 2017 1",
     "author": "Test Author 2",
     "year": 2017,
-    "link": "test.com/book2017"
+    "link": "test.com/book20171"
+  },
+  {
+    "title": "Test Book 2017 2",
+    "author": "Test Author 3",
+    "year": 2017,
+    "link": "test.com/book20172"
   }
 ]
 `
@@ -72,6 +77,15 @@ describe('parseBooks', () => {
     const books = parseBooks(SAMPLE_INPUT)
 
     expect(Array.from(books.sections.keys())).toEqual([2017, 2016])
+  })
+
+  it('preserves the order of the books in the JSON file', () => {
+    const books = parseBooks(SAMPLE_INPUT)
+
+    const lastYearsBooks = books.sections.get(2017)
+
+    expect(lastYearsBooks[0].title).toEqual('Test Book 2017 1')
+    expect(lastYearsBooks[1].title).toEqual('Test Book 2017 2')
   })
 
   describe('when the input is not well-formed', () => {
