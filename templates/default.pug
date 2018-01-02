@@ -12,8 +12,8 @@ html(lang="en")
         .header__hero-image
         .header__avatar-image
 
-        h1 #{config.name}
-        h2 Reading List
+        h1.title #{config.name}
+        h2.subtitle Reading List
 
       section.reading-list__content
         nav.reading-list__year-list
@@ -29,9 +29,9 @@ html(lang="en")
               each book in books.sections.get(year)
                 li.book-list__book
                   if book.link
-                    | #[span.book-list__title: a(href=book.link) #{book.title}] by #[span.book-list__author #{book.author}]
+                    | #[span.book-list__title: a(href=book.link) #{book.title}] &mdash; #[span.book-list__author #{book.author}]
                   else
-                    | #{book.title} by #[span.book-list__author #{book.author}]
+                    | #{book.title} &mdash; #[span.book-list__author #{book.author}]
 
       footer.reading-list__footer
-        | Created using the #[a(href="https://github.com/jtompkins/readinglist.js") ReadingList.js] NPM package.
+        | Created with &hearts; using #[a(href="https://github.com/jtompkins/readinglist.js") readinglist.js]
