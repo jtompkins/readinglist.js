@@ -4,7 +4,7 @@ A static site generator for your reading list
 
 ## Installation
 
-`$ yarn add --global readinglist.js`
+`$ yarn global add readinglist.js`
 
 ## Usage
 
