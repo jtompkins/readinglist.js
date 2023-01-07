@@ -1,4 +1,4 @@
-const parseBooks = require('./parseBooks')
+import parseBooks from './parseBooks'
 
 const SAMPLE_INPUT = `
 [

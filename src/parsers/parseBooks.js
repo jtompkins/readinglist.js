@@ -21,7 +21,7 @@ const parseBooks = (bookStr) => {
     throw new Error('A JSON string must be supplied')
   }
 
-  const { error, value } = schema.validate(JSON.parse(bookStr), schema)
+  const { error, value } = schema.validate(JSON.parse(bookStr))
 
   if (error) {
     throw error
