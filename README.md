@@ -1,10 +1,10 @@
-# readinglist.js
+# readinglist-js
 
 A static site generator for your reading list
 
 ## Installation
 
-`$ yarn global add readinglist.js`
+`$ yarn global add readinglist-js`
 
 ## Usage
 
@@ -65,7 +65,7 @@ The book file is a JSON file containing an array of JSON objects. The structure 
 
 To generate your site, run the following command in the directory where `config.toml` and `books.json` live:
 
-`readinglist`
+`reading-list`
 
 ### Sample output
 

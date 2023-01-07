@@ -1,11 +1,12 @@
 {
-  "name": "readinglist.js",
+  "name": "readinglist-js",
   "version": "1.0.0",
   "description": "A static site generator for your reading list",
   "main": "src/index.js",
   "author": "Joshua Tompkins <josh@joshtompkins.com>",
   "license": "MIT",
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.12",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -18,15 +19,16 @@
     "pug": "^3.0.2",
     "toml": "^3.0.0"
   },
+  "type": "module",
   "scripts": {
     "format": "prettier --write \"src/**/*.js\"",
     "compileSass": "node-sass \"./themes\" --output \"./themes\" --output-style compressed",
-    "test": "jest",
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
     "testWithDebug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "verify": "yarn format && yarn compileSass && yarn test"
   },
   "preferGlobal": true,
   "bin": {
-    "readinglist": "src/index.js"
+    "reading-list": "src/index.js"
   }
 }
