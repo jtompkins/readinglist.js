@@ -1,4 +1,4 @@
-const parseConfig = require('./parseConfig')
+import parseConfig from './parseConfig'
 
 const GOOD_CONFIG = `
   [meta]
@@ -38,10 +38,11 @@ const MISSING_TOP_LEVEL_KEYS = `
   theme = "default"
 `
 
-describe('parseConfig', async () => {
+describe('parseConfig', () => {
   it('parse a TOML string', () => {
-    const toml = parseConfig(GOOD_CONFIG)
-    expect(toml).toBeInstanceOf(Object)
+    expect(() => {
+      parseConfig(GOOD_CONFIG)
+    }).not.toThrow()
   })
 
   it('fills in required values with well-defined defaults', () => {

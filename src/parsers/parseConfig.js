@@ -1,7 +1,7 @@
-import { parse } from 'toml'
 import Joi from 'joi'
+import toml, { parse } from 'toml'
 
-const schema = {
+const schema = Joi.object({
   meta: Joi.object()
     .keys({
       name: Joi.string().required(),
@@ -15,14 +15,15 @@ const schema = {
       theme: Joi.string().default('default'),
     })
     .required(),
-}
+})
 
 const parseConfig = (configStr) => {
   if (configStr === null || configStr === '') {
     throw new Error('A TOML string must be supplied')
   }
 
-  const { error, value } = schema.validate(parse(configStr), schema)
+  const parsedToml = toml.parse(configStr)
+  const { error, value } = schema.validate(parsedToml)
 
   if (error) {
     throw error
