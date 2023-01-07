@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import toml, { parse } from 'toml'
+import toml from 'toml'
 
 const schema = Joi.object({
   meta: Joi.object()
@@ -32,4 +32,4 @@ const parseConfig = (configStr) => {
   return value
 }
 
-export default parseConfig
+export { parseConfig }

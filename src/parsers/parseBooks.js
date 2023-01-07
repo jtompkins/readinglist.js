@@ -43,4 +43,4 @@ const parseBooks = (bookStr) => {
   }
 }
 
-export default parseBooks
+export { parseBooks }

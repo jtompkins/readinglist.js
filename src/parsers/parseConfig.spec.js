@@ -1,4 +1,4 @@
-import parseConfig from './parseConfig'
+import { parseConfig } from './parseConfig.js'
 
 const GOOD_CONFIG = `
   [meta]

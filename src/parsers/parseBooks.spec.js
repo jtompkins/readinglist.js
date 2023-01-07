@@ -1,4 +1,4 @@
-import parseBooks from './parseBooks'
+import { parseBooks } from './parseBooks.js'
 
 const SAMPLE_INPUT = `
 [

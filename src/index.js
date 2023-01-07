@@ -1,16 +1,17 @@
 #! /usr/bin/env node
 
-const fs = require('fs')
-const util = require('util')
+import fs from 'fs'
+import util from 'util'
 
-const parseBooks = require('./parsers/parseBooks')
-const parseConfig = require('./parsers/parseConfig')
-const {
+import { parseBooks } from './parsers/parseBooks.js'
+import { parseConfig } from './parsers/parseConfig.js'
+
+import {
   getTemplatePath,
   getStylePath,
   getOutputPath,
   renderTemplate,
-} = require('./renderer')
+} from './renderer.js'
 
 const readFile = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
