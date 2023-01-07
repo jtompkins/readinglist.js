@@ -1,5 +1,5 @@
-const toml = require('toml')
-const Joi = require('joi')
+import { parse } from 'toml'
+import Joi from 'joi'
 
 const schema = {
   meta: Joi.object()
@@ -17,12 +17,12 @@ const schema = {
     .required(),
 }
 
-const parseConfig = configStr => {
+const parseConfig = (configStr) => {
   if (configStr === null || configStr === '') {
     throw new Error('A TOML string must be supplied')
   }
 
-  const { error, value } = Joi.validate(toml.parse(configStr), schema)
+  const { error, value } = schema.validate(parse(configStr), schema)
 
   if (error) {
     throw error
@@ -31,4 +31,4 @@ const parseConfig = configStr => {
   return value
 }
 
-module.exports = parseConfig
+export default parseConfig

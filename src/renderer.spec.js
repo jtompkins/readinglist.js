@@ -1,6 +1,6 @@
-const path = require('path')
-const { getTemplatePath, getStylePath, renderTemplate } = require('./renderer')
-const { mockCompileFile, mockTemplateRenderer } = require('pug')
+import { join } from 'path'
+import { getTemplatePath, getStylePath, renderTemplate } from './renderer'
+import { mockCompileFile, mockTemplateRenderer } from 'pug'
 
 const TEMPLATE_PATH = '/path/to/template'
 const TEST_CONTEXT = { config: {}, books: [] }
@@ -10,11 +10,7 @@ describe('Render utils', () => {
     it('returns the path to the template in the module', () => {
       const templatePath = getTemplatePath('default')
 
-      const realTemplatePath = path.join(
-        process.cwd(),
-        'templates',
-        'default.pug',
-      )
+      const realTemplatePath = join(process.cwd(), 'templates', 'default.pug')
 
       expect(templatePath).toEqual(realTemplatePath)
     })
@@ -23,7 +19,7 @@ describe('Render utils', () => {
   describe('getStylePath', () => {
     it('returns the path to the CSS theme in the module', () => {
       const stylePath = getStylePath('default')
-      const realStylePath = path.join(process.cwd(), 'themes', 'default.css')
+      const realStylePath = join(process.cwd(), 'themes', 'default.css')
 
       expect(stylePath).toEqual(realStylePath)
     })

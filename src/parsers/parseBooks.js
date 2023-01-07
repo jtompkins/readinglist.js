@@ -1,13 +1,10 @@
-const Joi = require('joi')
-const tap = require('../util/tap')
+import Joi from 'joi'
 
 const schema = Joi.array().items(
   Joi.object().keys({
     title: Joi.string().required(),
     author: Joi.string().required(),
-    year: Joi.number()
-      .integer()
-      .required(),
+    year: Joi.number().integer().required(),
     link: Joi.string(),
   }),
 )
@@ -19,26 +16,26 @@ const reverseYearComparator = (l, r) => {
   return 0
 }
 
-const parseBooks = bookStr => {
+const parseBooks = (bookStr) => {
   if (bookStr === null || bookStr === '') {
     throw new Error('A JSON string must be supplied')
   }
 
-  const { error, value } = Joi.validate(JSON.parse(bookStr), schema)
+  const { error, value } = schema.validate(JSON.parse(bookStr), schema)
 
   if (error) {
     throw error
   }
 
   const years = new Set(
-    value.map(book => book.year).sort(reverseYearComparator),
+    value.map((book) => book.year).sort(reverseYearComparator),
   )
 
   const sections = new Map()
 
   // insert the years in sorted order
-  years.forEach(year => sections.set(year, []))
-  value.forEach(book => sections.get(book.year).push(book))
+  years.forEach((year) => sections.set(year, []))
+  value.forEach((book) => sections.get(book.year).push(book))
 
   return {
     years,
@@ -46,4 +43,4 @@ const parseBooks = bookStr => {
   }
 }
 
-module.exports = parseBooks
+export default parseBooks
