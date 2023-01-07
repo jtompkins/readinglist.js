@@ -1,25 +1,26 @@
-const path = require('path')
-const pug = require('pug')
+import { join } from 'path'
+import { compileFile } from 'pug'
 
-const getTemplatePath = theme => {
-  return path.join(__dirname, '..', 'templates', `${theme}.pug`)
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const getTemplatePath = (theme) => {
+  return join(__dirname, '..', 'templates', `${theme}.pug`)
 }
 
-const getStylePath = theme => {
-  return path.join(__dirname, '..', 'themes', `${theme}.css`)
+const getStylePath = (theme) => {
+  return join(__dirname, '..', 'themes', `${theme}.css`)
 }
 
 const getOutputPath = (outputDir, file) => {
-  return path.join(process.cwd(), outputDir, file)
+  return join(process.cwd(), outputDir, file)
 }
 
 const renderTemplate = (templatePath, context) => {
-  return pug.compileFile(templatePath, { pretty: true })(context)
+  return compileFile(templatePath, { pretty: true })(context)
 }
 
-module.exports = {
-  getTemplatePath,
-  getStylePath,
-  getOutputPath,
-  renderTemplate,
-}
+export { getTemplatePath, getStylePath, getOutputPath, renderTemplate }

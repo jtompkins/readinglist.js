@@ -31,7 +31,7 @@ html(lang="en")
                   if book.link
                     | #[span.book-list__title: a(href=book.link) #{book.title}] &mdash; #[span.book-list__author #{book.author}]
                   else
-                    | #{book.title} &mdash; #[span.book-list__author #{book.author}]
+                    | #[span.book-list__title #{book.title}] &mdash; #[span.book-list__author #{book.author}]
 
       footer.reading-list__footer
         | Created with &hearts; using #[a(href="https://github.com/jtompkins/readinglist.js") readinglist.js]
