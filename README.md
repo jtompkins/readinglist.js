@@ -8,7 +8,7 @@ A static site generator for your reading list
 
 ## Usage
 
-To generate your reading list website, you'll need two files: a TOML `config` file and a JSON `book` file.
+To generate your reading list website, you'll need two files: a TOML `config.toml` file and a JSON `book.json` file. To display an avatar image in the rendered static site, you'll also need to provide an `avatar.png` file, which should live in the same directory as the generated output.
 
 ### The Config file
 
@@ -73,9 +73,15 @@ See [reading.joshtompkins.com](http://reading.joshtompkins.com) for a sample sit
 
 ## Development
 
-After checking out the repo, run `yarn install` to install dependencies. Then, run `yarn test` to run the tests.
-
-To install this gem onto your local machine, run `yarn link`. To release a new version, run `yarn publish`, which will create a git tag for the version and push the new version to NPM. Don't forget to push the new tags to your git remote!
+| Command                | Purpose                                                                                                                                                                                                                    |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `yarn install`         | Installs local dependencies.                                                                                                                                                                                               |
+| `yarn test`            | Runs local tests.                                                                                                                                                                                                          |
+| `yarn testWithDebug`   | Sets up node for VS Code debugging. Probably not necessary now that VS Code has built-in Node debugging support.                                                                                                           |
+| `yarn compileSass`     | When the package is installed globally, it expects a `.css` file to power the theme, but the development styles are SASS. Run this command to compile the SASS styles to vanilla CSS.                                      |
+| `yarn link`            | Prepares this package to be installed locally for inclusion in other projects. In the other project, run `yarn link readinglist-js` to install.                                                                            |
+| `yarn global add $PWD` | Installs this package globally to your system, allowing you to test the CLI. Note that the contents of the repo are _not watched_, so if you make changes, you'll need to run this command again.                          |
+| `yarn publish`         | Push the latest version of the package to the global NPM repository. You'll need credentials to do this. This command creates local git tags to mark the release version; don't forget to push these to the remote origin. |
 
 ## Contributing
 
