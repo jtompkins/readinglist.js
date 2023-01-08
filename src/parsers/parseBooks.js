@@ -2,26 +2,35 @@ import Joi from 'joi'
 
 const CURRENTLY_READING_KEY = 'Current'
 
-const schema = Joi.array().items(
-  Joi.object()
+const schema = Joi.object({
+  meta: Joi.object()
     .keys({
-      title: Joi.string().required(),
-      author: Joi.string().required(),
-      current: Joi.boolean(),
-      year: Joi.number().integer(),
-      link: Joi.string(),
+      name: Joi.string().required(),
+      email: Joi.string(),
+      website: Joi.string(),
     })
-    .when(Joi.object({ current: Joi.exist() }).unknown(), {
-      then: Joi.object({
-        year: Joi.forbidden(),
+    .required(),
+  books: Joi.array().items(
+    Joi.object()
+      .keys({
+        title: Joi.string().required(),
+        author: Joi.string().required(),
+        current: Joi.boolean(),
+        year: Joi.number().integer(),
+        link: Joi.string(),
+      })
+      .when(Joi.object({ current: Joi.exist() }).unknown(), {
+        then: Joi.object({
+          year: Joi.forbidden(),
+        }),
+      })
+      .when(Joi.object({ year: Joi.exist() }).unknown(), {
+        then: Joi.object({
+          current: Joi.forbidden(),
+        }),
       }),
-    })
-    .when(Joi.object({ year: Joi.exist() }).unknown(), {
-      then: Joi.object({
-        current: Joi.forbidden(),
-      }),
-    }),
-)
+  ),
+})
 
 const reverseYearComparator = (l, r) => {
   if (l === CURRENTLY_READING_KEY) return -1
@@ -45,7 +54,7 @@ const parseBooks = (bookStr) => {
 
   const sections = new Map()
 
-  value.forEach((book) => {
+  value.books.forEach((book) => {
     let key
 
     if (book.current) {
@@ -64,6 +73,11 @@ const parseBooks = (bookStr) => {
   const years = new Set(Array.from(sections.keys()).sort(reverseYearComparator))
 
   return {
+    meta: {
+      name: value.meta.name,
+      email: value.meta.email,
+      website: value.meta.website,
+    },
     years,
     sections,
   }

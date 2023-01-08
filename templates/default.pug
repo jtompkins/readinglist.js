@@ -3,7 +3,7 @@ doctype html
 html(lang="en")
   head
     meta(charset="utf-8")
-    title Reading List - #{config.name}
+    title Reading List - #{meta.name}
     link(rel="stylesheet" href="styles.css")
 
   body
@@ -12,21 +12,21 @@ html(lang="en")
         .header__hero-image
         .header__avatar-image
 
-        h1.title #{config.name}
+        h1.title #{meta.name}
         h2.subtitle Reading List
 
       section.reading-list__content
         nav.reading-list__year-list
           ul
-            each year in Array.from(books.years.values())
+            each year in Array.from(years.values())
               li: a(href=year) #{year}
  
-        each year in Array.from(books.years.values())
+        each year in Array.from(years.values())
           .reading-list__year
             h2: a(id=year) #{year}
 
             ul.year__book-list
-              each book in books.sections.get(year)
+              each book in sections.get(year)
                 li.book-list__book
                   if book.link
                     | #[span.book-list__title: a(href=book.link) #{book.title}] &mdash; #[span.book-list__author #{book.author}]

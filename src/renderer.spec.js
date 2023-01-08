@@ -5,90 +5,85 @@ import { getTemplatePath, getStylePath, renderTemplate } from './renderer.js'
 import { CURRENTLY_READING_KEY } from './parsers/parseBooks.js'
 
 const TEMPLATE_PATH = './templates/default.pug'
+
 const TEST_DATA = {
-  config: {
+  meta: {
     name: 'Test Name',
   },
-  books: {
-    years: new Set([2023]),
-    sections: new Map([
+  years: new Set([2023]),
+  sections: new Map([
+    [
+      2023,
       [
-        2023,
-        [
-          {
-            title: 'Test Title 1',
-            author: 'Test Author 1',
-            link: 'http://www.test.com',
-            year: '2023',
-          },
-        ],
+        {
+          title: 'Test Title 1',
+          author: 'Test Author 1',
+          link: 'http://www.test.com',
+          year: '2023',
+        },
       ],
-    ]),
-  },
+    ],
+  ]),
 }
 
 const TEST_DATA_WITH_MULTIPLE_YEARS = {
-  config: {
+  meta: {
     name: 'Test Name',
   },
-  books: {
-    years: new Set([2024, 2023]),
-    sections: new Map([
+  years: new Set([2024, 2023]),
+  sections: new Map([
+    [
+      2023,
       [
-        2023,
-        [
-          {
-            title: 'Test Title 1',
-            author: 'Test Author 1',
-            link: 'http://www.test.com',
-            year: '2023',
-          },
-        ],
+        {
+          title: 'Test Title 1',
+          author: 'Test Author 1',
+          link: 'http://www.test.com',
+          year: '2023',
+        },
       ],
+    ],
+    [
+      2024,
       [
-        2024,
-        [
-          {
-            title: 'Test Title 2',
-            author: 'Test Author 2',
-            year: '2024',
-          },
-        ],
+        {
+          title: 'Test Title 2',
+          author: 'Test Author 2',
+          year: '2024',
+        },
       ],
-    ]),
-  },
+    ],
+  ]),
 }
 
 const TEST_DATA_WITH_CURRENT = {
-  config: {
+  meta: {
     name: 'Test Name',
   },
-  books: {
-    years: new Set([CURRENTLY_READING_KEY, 2023]),
-    sections: new Map([
+  years: new Set([CURRENTLY_READING_KEY, 2023]),
+  sections: new Map([
+    [
+      CURRENTLY_READING_KEY,
       [
-        CURRENTLY_READING_KEY,
-        [
-          {
-            title: 'Test Title 1',
-            author: 'Test Author 1',
-            link: 'http://www.test.com',
-            current: true,
-          },
-        ],
+        {
+          title: 'Test Title 1',
+          author: 'Test Author 1',
+          link: 'http://www.test.com',
+          current: true,
+        },
       ],
+    ],
+    [
+      2023,
       [
-        2023,
-        [
-          {
-            title: 'Test Title 2',
-            author: 'Test Author 2',
-            year: '2023',
-          },
-        ],
+        {
+          title: 'Test Title 2',
+          author: 'Test Author 2',
+          year: '2023',
+        },
       ],
-    ]),
-  },
+    ],
+  ]),
 }
 
 describe('Render utils', () => {

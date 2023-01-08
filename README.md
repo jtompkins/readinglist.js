@@ -8,58 +8,46 @@ A static site generator for your reading list
 
 ## Usage
 
-To generate your reading list website, you'll need two files: a TOML `config.toml` file and a JSON `book.json` file. To display an avatar image in the rendered static site, you'll also need to provide an `avatar.png` file, which should live in the same directory as the generated output.
+To generate your reading list website, you'll need a JSON `book.json` file. To display an avatar image in the rendered static site, you'll also need to provide an `avatar.png` file, which should live in the same directory as the generated output.
 
-### The Config file
+## The Book file
 
-The basic structure of the config file looks like this:
+The book file is a JSON file with two keys: a `meta` key, containing an object with configuration options, and a `books` key, containing an array of JSON objects. The structure should look like this:
 
 ```
-[meta]
-name: YOUR_NAME
-email: YOUR_EMAIL
-website: YOUR_WEBSITE
-
-[output]
-dir: OUTPUT_DIRECTORY
-theme: default
+{
+  "meta": {
+    ...
+  },
+  "books": [
+    ...
+  ]
+}
 ```
 
-| Key       | Value                                                                                                                                                                   |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`    | Your name. Displayed in the header of the generated site.                                                                                                               |
-| `email`   | _(Currently unused)_ Your email address.                                                                                                                                |
-| `website` | _(Currently unused)_ Your website.                                                                                                                                      |
-| `dir`     | The _relative_ path to the output directory. The generated HTML and CSS files will be written there. **Caution**: Any existing HTML and CSS output will be overwritten. |
-| `theme`   | The name of the theme for your site. The only supported value (at least for now) is `default`.                                                                          |
+### The `meta` Object
+
+The structure of the `meta` object looks like this:
+
+| Key       | Value                                                     |
+| --------- | --------------------------------------------------------- |
+| `name`    | Your name. Displayed in the header of the generated site. |
+| `email`   | _(Currently unused)_ Your email address.                  |
+| `website` | _(Currently unused)_ Your website.                        |
 
 All of the values are required.
 
-### The Book file
+#### The `book` object
 
-The book file is a JSON file containing an array of JSON objects. The structure looks like this:
+The structure of the book object looks like this:
 
-```
-[
-  {
-    "title": "The Lion, the Witch, and the Wardrobe",
-    "author": "C. S. Lewis",
-    "year": 2017,
-    "link": "https://www.amazon.com/Lion-Witch-Wardrobe-Chronicles-Narnia/dp/0064404994/"
-  },
-
-  {
-    // etc
-  }
-]
-```
-
-| Key      | Type     | Value                                                                                                                             |
-| -------- | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `title`  | `string` | The title of the book                                                                                                             |
-| `author` | `string` | The author of the book                                                                                                            |
-| `year`   | `int`    | The year you _read_ the book (**not** the year it was published)                                                                  |
-| `link`   | `string` | _(Optional)_ A link to the book's website or Amazon page. If provided, the book's title will be a link to this URL in the output. |
+| Key       | Type      | Value                                                                                                                             |
+| --------- | --------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `title`   | `string`  | The title of the book                                                                                                             |
+| `author`  | `string`  | The author of the book                                                                                                            |
+| `year`    | `int`     | The year you _read_ the book (**not** the year it was published). If `year` is set, `current` must _not_ be set.                  |
+| `current` | `boolean` | Set `current` to `true` to mark a book you're currently reading. If `current` is set, `year` must _not_ be set.                   |
+| `link`    | `string`  | _(Optional)_ A link to the book's website or Amazon page. If provided, the book's title will be a link to this URL in the output. |
 
 ### Running the generator
 
