@@ -51,9 +51,9 @@ The structure of the book object looks like this:
 
 ### Running the generator
 
-To generate your site, run the following command in the directory where `config.toml` and `books.json` live:
+To generate your site, run the following command:
 
-`reading-list`
+`reading-list -b <path to your books.json file, defaults to ./books.json> -o <path to your output directory, defaults to current>`
 
 ### Sample output
 
@@ -61,11 +61,11 @@ See [reading.joshtompkins.com](http://reading.joshtompkins.com) for a sample sit
 
 ## Development
 
-| Command                | Purpose                                                                                                                                                                                                                    |
+| Useful Commands        | Purpose                                                                                                                                                                                                                    |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `yarn install`         | Installs local dependencies.                                                                                                                                                                                               |
 | `yarn test`            | Runs local tests.                                                                                                                                                                                                          |
-| `yarn testWithDebug`   | Sets up node for VS Code debugging. Probably not necessary now that VS Code has built-in Node debugging support.                                                                                                           |
+| `yarn sample`          | Do a test run against the sample books file in the `test` directory, for local testing.                                                                                                                                    |
 | `yarn compileSass`     | When the package is installed globally, it expects a `.css` file to power the theme, but the development styles are SASS. Run this command to compile the SASS styles to vanilla CSS.                                      |
 | `yarn link`            | Prepares this package to be installed locally for inclusion in other projects. In the other project, run `yarn link readinglist-js` to install.                                                                            |
 | `yarn global add $PWD` | Installs this package globally to your system, allowing you to test the CLI. Note that the contents of the repo are _not watched_, so if you make changes, you'll need to run this command again.                          |
