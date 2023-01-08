@@ -5,7 +5,8 @@ const TEST_BOOK_FILE = `
     "meta": {
       "name": "Test User",
       "email": "test@test.com",
-      "website": "http://www.test.com"
+      "website": "http://www.test.com",
+      "theme": "default"
     },
     "books": [
       {
@@ -59,6 +60,7 @@ describe('parseBooks', () => {
       expect(books.meta.name).toBe('Test User')
       expect(books.meta.email).toBe('test@test.com')
       expect(books.meta.website).toBe('http://www.test.com')
+      expect(books.meta.theme).toBe('default')
     })
 
     describe('when the input is not well-formed', () => {

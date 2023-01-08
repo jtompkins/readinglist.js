@@ -8,6 +8,7 @@ const schema = Joi.object({
       name: Joi.string().required(),
       email: Joi.string(),
       website: Joi.string(),
+      theme: Joi.string().default('default'),
     })
     .required(),
   books: Joi.array().items(
@@ -77,6 +78,7 @@ const parseBooks = (bookStr) => {
       name: value.meta.name,
       email: value.meta.email,
       website: value.meta.website,
+      theme: value.meta.theme,
     },
     years,
     sections,
