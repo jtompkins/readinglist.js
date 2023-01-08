@@ -17,18 +17,20 @@
     "prettier": "2.8.2"
   },
   "dependencies": {
+    "colors": "^1.4.0",
+    "commander": "^9.5.0",
+    "figlet": "^1.5.2",
     "joi": "^17.7.0",
-    "pug": "^3.0.2",
-    "toml": "^3.0.0"
+    "pug": "^3.0.2"
   },
   "type": "module",
   "scripts": {
     "format": "prettier --write \"src/**/*.js\"",
     "compileSass": "node-sass \"./themes\" --output \"./themes\" --output-style compressed",
-    "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
-    "testWithDebug": "node --inspect-brk node_modules/.bin/jest --runInBand",
+    "test": "node --experimental-vm-modules $(yarn bin jest)",
     "verify": "yarn format && yarn compileSass && yarn test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "sample": "node src/index.js -b ./test/sample-books-file.json -o ./test"
   },
   "preferGlobal": true,
   "bin": {

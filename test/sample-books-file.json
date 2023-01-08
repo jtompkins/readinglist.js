@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "name": "Test User",
+    "email": "test@test.com",
+    "website": "http://www.test.com",
+    "theme": "default"
+  },
+  "books": [
+    {
+      "title": "Currently Reading Book",
+      "author": "test Author 4",
+      "current": true,
+      "link": "http://test.com/book4"
+    },
+    {
+      "title": "Test Book 2016",
+      "author": "Test Author 1",
+      "year": 2016,
+      "link": "https://test.com/book2016"
+    },
+    {
+      "title": "Test Book 2017 1",
+      "author": "Test Author 2",
+      "year": 2017,
+      "link": "test.com/book20171"
+    },
+    {
+      "title": "Test Book 2017 2",
+      "author": "Test Author 3",
+      "year": 2017,
+      "link": "test.com/book20172"
+    }
+  ]
+}
