@@ -1,15 +1,31 @@
 import Joi from 'joi'
 
+const CURRENTLY_READING_KEY = 'Current'
+
 const schema = Joi.array().items(
-  Joi.object().keys({
-    title: Joi.string().required(),
-    author: Joi.string().required(),
-    year: Joi.number().integer().required(),
-    link: Joi.string(),
-  }),
+  Joi.object()
+    .keys({
+      title: Joi.string().required(),
+      author: Joi.string().required(),
+      current: Joi.boolean(),
+      year: Joi.number().integer(),
+      link: Joi.string(),
+    })
+    .when(Joi.object({ current: Joi.exist() }).unknown(), {
+      then: Joi.object({
+        year: Joi.forbidden(),
+      }),
+    })
+    .when(Joi.object({ year: Joi.exist() }).unknown(), {
+      then: Joi.object({
+        current: Joi.forbidden(),
+      }),
+    }),
 )
 
 const reverseYearComparator = (l, r) => {
+  if (l === CURRENTLY_READING_KEY) return -1
+  if (r === CURRENTLY_READING_KEY) return 1
   if (l < r) return 1
   if (l > r) return -1
 
@@ -27,15 +43,25 @@ const parseBooks = (bookStr) => {
     throw error
   }
 
-  const years = new Set(
-    value.map((book) => book.year).sort(reverseYearComparator),
-  )
-
   const sections = new Map()
 
-  // insert the years in sorted order
-  years.forEach((year) => sections.set(year, []))
-  value.forEach((book) => sections.get(book.year).push(book))
+  value.forEach((book) => {
+    let key
+
+    if (book.current) {
+      key = CURRENTLY_READING_KEY
+    } else {
+      key = book.year
+    }
+
+    if (!sections.get(key)) {
+      sections.set(key, [])
+    }
+
+    sections.get(key).push(book)
+  })
+
+  const years = new Set(Array.from(sections.keys()).sort(reverseYearComparator))
 
   return {
     years,
@@ -43,4 +69,4 @@ const parseBooks = (bookStr) => {
   }
 }
 
-export { parseBooks }
+export { parseBooks, CURRENTLY_READING_KEY }

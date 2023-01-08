@@ -21,7 +21,7 @@ html(lang="en")
             each year in Array.from(books.years.values())
               li: a(href=year) #{year}
  
-        each year in Array.from(books.sections.keys())
+        each year in Array.from(books.years.values())
           .reading-list__year
             h2: a(id=year) #{year}
 
