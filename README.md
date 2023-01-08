@@ -61,15 +61,15 @@ See [reading.joshtompkins.com](http://reading.joshtompkins.com) for a sample sit
 
 ## Development
 
-| Useful Commands        | Purpose                                                                                                                                                                                                                    |
+| Useful `yarn` Commands | Purpose                                                                                                                                                                                                                    |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `yarn install`         | Installs local dependencies.                                                                                                                                                                                               |
-| `yarn test`            | Runs local tests.                                                                                                                                                                                                          |
-| `yarn sample`          | Do a test run against the sample books file in the `test` directory, for local testing.                                                                                                                                    |
-| `yarn compileSass`     | When the package is installed globally, it expects a `.css` file to power the theme, but the development styles are SASS. Run this command to compile the SASS styles to vanilla CSS.                                      |
-| `yarn link`            | Prepares this package to be installed locally for inclusion in other projects. In the other project, run `yarn link readinglist-js` to install.                                                                            |
-| `yarn global add $PWD` | Installs this package globally to your system, allowing you to test the CLI. Note that the contents of the repo are _not watched_, so if you make changes, you'll need to run this command again.                          |
-| `yarn publish`         | Push the latest version of the package to the global NPM repository. You'll need credentials to do this. This command creates local git tags to mark the release version; don't forget to push these to the remote origin. |
+| `install`              | Installs local dependencies.                                                                                                                                                                                               |
+| `test`                 | Runs local tests.                                                                                                                                                                                                          |
+| `sample`               | Do a test run against the sample books file in the `test` directory, for local testing.                                                                                                                                    |
+| `compileSass`          | When the package is installed globally, it expects a `.css` file to power the theme, but the development styles are SASS. Run this command to compile the SASS styles to vanilla CSS.                                      |
+| `link`                 | Prepares this package to be installed locally for inclusion in other projects. In the other project, run `link readinglist-js` to install.                                                                                 |
+| `global add $PWD`      | Installs this package globally to your system, allowing you to test the CLI. Note that the contents of the repo are _not watched_, so if you make changes, you'll need to run this command again.                          |
+| `publish`              | Push the latest version of the package to the global NPM repository. You'll need credentials to do this. This command creates local git tags to mark the release version; don't forget to push these to the remote origin. |
 
 ## Contributing
 
