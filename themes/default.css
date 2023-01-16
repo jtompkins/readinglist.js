@@ -85,7 +85,7 @@ a {
   margin: 0px;
   padding: 0px;
 
-  font-size: 48pt;
+  font-size: 4rem;
   font-weight: 700;
 }
 
@@ -95,7 +95,7 @@ a {
   margin-bottom: -5px;
   padding: 0px;
 
-  font-size: 18pt;
+  font-size: 1.5rem;
   font-weight: 200;
 }
 
@@ -205,16 +205,100 @@ footer a {
   color: var(--text-alternate-color);
 }
 
-@media (max-width: 375px) {
+@media (max-width: 320px) {
+  body {
+    font-size: 10pt;
+  }
+
   .reading-list {
-    grid-template-rows: 20px 75px 75px 1fr auto;
-    grid-template-columns: 150px 1fr;
+    grid-template-rows: 10px 50px 1fr auto;
+    grid-template-columns: 50px 1fr;
 
     grid-template-areas:
       'gradient gradient'
-      'logo title'
-      'logo subtitle'
+      'logo titles'
       'content content'
       'footer footer';
+  }
+
+  nav {
+    display: none;
+  }
+
+  .logo {
+    height: 50px;
+    width: 50px;
+  }
+
+  .title {
+    margin-top: 40px;
+    margin-left: 20px;
+  }
+
+  .title h1 {
+    font-size: 1.5rem;
+  }
+
+  .title h2 {
+    font-size: 1rem;
+  }
+
+  article {
+    margin-left: 25px;
+  }
+
+  .tags {
+    display: none;
+  }
+
+  .year h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 736px) {
+  body {
+    font-size: 12pt;
+  }
+
+  .reading-list {
+    grid-template-rows: 10px 75px 1fr auto;
+    grid-template-columns: 75px 1fr;
+
+    grid-template-areas:
+      'gradient gradient'
+      'logo titles'
+      'content content'
+      'footer footer';
+  }
+
+  nav {
+    display: none;
+  }
+
+  .logo {
+    height: 70px;
+    width: 70px;
+  }
+
+  .title {
+    margin-top: 40px;
+    margin-left: 20px;
+  }
+
+  .title h1 {
+    font-size: 2rem;
+  }
+
+  .title h2 {
+    font-size: 1.25rem;
+  }
+
+  article {
+    margin-left: 60px;
+  }
+
+  .year h2 {
+    font-size: 1.5rem;
   }
 }
