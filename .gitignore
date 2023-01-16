@@ -131,3 +131,5 @@ dist
 
 test/*.html
 test/*.css
+
+.DS_Store
