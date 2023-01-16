@@ -41,13 +41,15 @@ All of the values are required.
 
 The structure of the book object looks like this:
 
-| Key       | Type      | Value                                                                                                                             |
-| --------- | --------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `title`   | `string`  | The title of the book                                                                                                             |
-| `author`  | `string`  | The author of the book                                                                                                            |
-| `year`    | `int`     | The year you _read_ the book (**not** the year it was published). If `year` is set, `current` must _not_ be set.                  |
-| `current` | `boolean` | Set `current` to `true` to mark a book you're currently reading. If `current` is set, `year` must _not_ be set.                   |
-| `link`    | `string`  | _(Optional)_ A link to the book's website or Amazon page. If provided, the book's title will be a link to this URL in the output. |
+| Key           | Type      | Value                                                                                                                             |
+| ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `title`       | `string`  | The title of the book                                                                                                             |
+| `author`      | `string`  | The author of the book                                                                                                            |
+| `year`        | `int`     | The year you _read_ the book (**not** the year it was published). If `year` is set, `current` must _not_ be set.                  |
+| `current`     | `boolean` | Set `current` to `true` to mark a book you're currently reading. If `current` is set, `year` must _not_ be set.                   |
+| `link`        | `string`  | _(Optional)_ A link to the book's website or Amazon page. If provided, the book's title will be a link to this URL in the output. |
+| `recommended` | `boolean` | _(Optional)_ If set to `true` or `false`, will mark a book as recommended (or not) in the output template. Ignored otherwise.     |
+| `finished`    | `boolean` | _(Optional)_ If set to `false`, marks the book as "Did not Finish" in the output template. Ignored otherwise.                     |
 
 ### Running the generator
 

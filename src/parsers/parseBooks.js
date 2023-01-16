@@ -19,6 +19,8 @@ const schema = Joi.object({
         current: Joi.boolean(),
         year: Joi.number().integer(),
         link: Joi.string(),
+        recommended: Joi.boolean(),
+        finished: Joi.boolean(),
       })
       .when(Joi.object({ current: Joi.exist() }).unknown(), {
         then: Joi.object({

@@ -33,6 +33,27 @@ const TEST_BOOK_FILE = `
         "author": "Test Author 3",
         "year": 2017,
         "link": "test.com/book20172"
+      },
+      {
+        "title": "Recommended Book",
+        "author": "Recommended Author",
+        "year": 2017,
+        "link": "test.com/book20172",
+        "recommended": true
+      },
+      {
+        "title": "Not Recommended Book",
+        "author": "Not Recommended Author",
+        "year": 2017,
+        "link": "test.com/book20172",
+        "recommended": false
+      },
+      {
+        "title": "Did Not Finish Book",
+        "author": "Did Not Finish Author",
+        "year": 2017,
+        "link": "test.com/book20172",
+        "finished": false
       }
     ]
   }
@@ -144,6 +165,45 @@ describe('parseBooks', () => {
       it('does not have a current section in the list of books', () => {
         expect(books.sections.size).toEqual(1)
         expect(books.sections.keys).not.toContain(CURRENTLY_READING_KEY)
+      })
+    })
+
+    describe('when the recommended field is set', () => {
+      it('marks a book as recommended if a true value is provided', () => {
+        const lastYearsBooks = books.sections.get(2017)
+
+        expect(lastYearsBooks[2].recommended).toBeDefined()
+        expect(lastYearsBooks[2].recommended).toBe(true)
+      })
+
+      it('marks a book as not ecommended if a false value is provided', () => {
+        const lastYearsBooks = books.sections.get(2017)
+
+        expect(lastYearsBooks[3].recommended).toBeDefined()
+        expect(lastYearsBooks[3].recommended).toBe(false)
+      })
+    })
+
+    describe('when the recommended field is not set', () => {
+      it('does not parse a falsey falue', () => {
+        const lastYearsBooks = books.sections.get(2017)
+
+        expect(lastYearsBooks[0].recommended).not.toBeDefined()
+      })
+    })
+
+    describe('when the DNF flag is not provided', () => {
+      it('parses a value if it is provided', () => {
+        const lastYearsBooks = books.sections.get(2017)
+
+        expect(lastYearsBooks[4].finished).toBeDefined()
+        expect(lastYearsBooks[4].finished).toBe(false)
+      })
+
+      it('does not parse a value if one is not provided', () => {
+        const lastYearsBooks = books.sections.get(2017)
+
+        expect(lastYearsBooks[0].finished).not.toBeDefined()
       })
     })
 
