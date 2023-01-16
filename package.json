@@ -24,9 +24,9 @@
   },
   "type": "module",
   "scripts": {
-    "format": "prettier --write \"src/**/*.js\"",
     "test": "node --experimental-vm-modules $(yarn bin jest)",
-    "verify": "yarn format && yarn compileSass && yarn test",
+    "format": "prettier --write \"src/**/*.js\"",
+    "verify": "yarn format && yarn test",
     "prepare": "husky install",
     "sample": "node src/index.js -b ./test/sample-books-file.json -o ./test"
   },

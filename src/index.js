@@ -33,6 +33,7 @@ program
     // './',
   )
   .option('-q, --quiet', 'Do not log output to the console')
+  .option('-n, --no-styles', 'Do not overwrite styles during generation')
 
 program.parse()
 
@@ -74,10 +75,13 @@ if (!opts.quiet) {
 }
 
 writeFileSync(getOutputPath(opts.outputDir, 'index.html'), renderedTemplate)
-copyFileSync(
-  getStylePath(books.meta.theme),
-  getOutputPath(opts.outputDir, 'styles.css'),
-)
+
+if (opts.styles) {
+  copyFileSync(
+    getStylePath(books.meta.theme),
+    getOutputPath(opts.outputDir, 'styles.css'),
+  )
+}
 
 if (!opts.quiet) {
   console.log(`✨ Done!\n`)
