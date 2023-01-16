@@ -8,30 +8,37 @@ html(lang="en")
 
   body
     .reading-list
-      header.reading-list__header
-        .header__hero-image
-        .header__avatar-image
+      .gradient
+      .logo
+      .title
+        h2 #{meta.name}
+        h1 What I'm Reading
 
-        h1.title #{meta.name}
-        h2.subtitle Reading List
+      nav
+        ul
+          each year in Array.from(years.values())
+            li: a(href=year) #{year}
 
-      section.reading-list__content
-        nav.reading-list__year-list
-          ul
-            each year in Array.from(years.values())
-              li: a(href=year) #{year}
- 
+      article
         each year in Array.from(years.values())
-          .reading-list__year
-            h2: a(id=year) #{year}
+          div(class={year: true, "currently-reading": year === 'Current'})
+            h2: a(id=year) #{year === 'Current' ? 'Currently Reading' : year}
 
-            ul.year__book-list
+            ul
               each book in sections.get(year)
-                li.book-list__book
-                  if book.link
-                    | #[span.book-list__title: a(href=book.link) #{book.title}] &mdash; #[span.book-list__author #{book.author}]
-                  else
-                    | #[span.book-list__title #{book.title}] &mdash; #[span.book-list__author #{book.author}]
+                li.book
+                  span.tags
+                    if book.recommended === true 
+                      span.recommended 👍
+                    else if book.recommended === false
+                      span.not-recommended 👎
+                    else if book.finished === false
+                      span.dnf DNF
 
-      footer.reading-list__footer
+                  if book.link
+                    | #[span.book-title: a(href=book.link) #{book.title}] &mdash; #[span.book-author #{book.author}]
+                  else
+                    | #[span.book-title #{book.title}] &mdash; #[span.book-author #{book.author}]
+
+      footer
         | Created with &hearts; using #[a(href="https://github.com/jtompkins/readinglist.js") readinglist.js]
