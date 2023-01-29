@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-import { readFileSync, writeFileSync, copyFileSync } from 'fs'
+import { readFileSync, writeFileSync, copyFileSync, mkdirSync } from 'fs'
 import { Command } from 'commander'
 import figlet from 'figlet'
 import colors from 'colors'
@@ -73,6 +73,8 @@ if (!opts.quiet) {
     )}...`,
   )
 }
+
+mkdirSync(opts.outputDir, { recursive: true })
 
 writeFileSync(getOutputPath(opts.outputDir, 'index.html'), renderedTemplate)
 

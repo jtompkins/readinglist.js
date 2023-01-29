@@ -129,8 +129,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-test/*.html
-test/*.css
 test/*.png
+test/build/
 
 .DS_Store
