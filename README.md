@@ -4,7 +4,7 @@ A static site generator for your reading list
 
 ## Installation
 
-`$ yarn global add readinglist-js`
+`$ npm add readinglist-js`
 
 ## Usage
 
@@ -55,7 +55,7 @@ The structure of the book object looks like this:
 
 To generate your site, run the following command:
 
-`reading-list -b <path to your books.json file, defaults to ./books.json> -o <path to your output directory, defaults to current>`
+`npx reading-list -b <path to your books.json file> -o <path to your output directory>`
 
 ### Sample output
 
