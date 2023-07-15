@@ -86,6 +86,33 @@ const TEST_DATA_WITH_CURRENT = {
   ]),
 }
 
+const TEST_DATA_WITH_MULITPLE_CURRENT = {
+  meta: {
+    name: 'Test Name',
+  },
+  years: new Set([CURRENTLY_READING_KEY]),
+  sections: new Map([
+    [
+      CURRENTLY_READING_KEY,
+      [
+        {
+          title: 'Test Title 1',
+          author: 'Test Author 1',
+          link: 'http://www.test.com',
+          current: true,
+        },
+
+        {
+          title: 'Test Title 2',
+          author: 'Test Author 2',
+          link: 'http://www.test.com',
+          current: true,
+        },
+      ],
+    ],
+  ]),
+}
+
 describe('Render utils', () => {
   describe('getTemplatePath', () => {
     it('returns the path to the template in the module', () => {
@@ -214,6 +241,20 @@ describe('Render utils', () => {
           const sections = $('.year h2')
 
           expect($(sections[0]).text()).toBe('Currently Reading')
+        })
+      })
+
+      describe('when there are multiple current books', () => {
+        beforeEach(() => {
+          const output = renderTemplate(
+            TEMPLATE_PATH,
+            TEST_DATA_WITH_MULITPLE_CURRENT,
+          )
+          $ = cheerio.load(output)
+        })
+
+        it('renders the current books', () => {
+          expect($('.book').length).toBe(2)
         })
       })
 

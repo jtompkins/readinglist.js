@@ -168,6 +168,46 @@ describe('parseBooks', () => {
       })
     })
 
+    describe('when there are multiple current books', () => {
+      const MULTIPLE_CURRENT_BOOKS = `
+        {
+          "meta": {
+            "name": "Test User",
+            "email": "test@test.com",
+            "website": "http://www.test.com"
+          },
+          "books": [
+            {
+              "title": "Test Book 2017 1",
+              "author": "Test Author 1",
+              "current": true,
+              "link": "test.com/book20171"
+            },
+
+            {
+              "title": "Test Book 2017 2",
+              "author": "Test Author 2",
+              "current": true,
+              "link": "test.com/book20172"
+            }
+          ]
+        }
+      `
+
+      beforeEach(() => {
+        books = parseBooks(MULTIPLE_CURRENT_BOOKS)
+      })
+
+      it('writes two books into the current section', () => {
+        expect(books.years.size).toEqual(1)
+        expect(books.years).toContain(CURRENTLY_READING_KEY)
+
+        const currentBooks = books.sections.get(CURRENTLY_READING_KEY)
+        expect(currentBooks).toBeDefined()
+        expect(currentBooks.length).toEqual(2)
+      })
+    })
+
     describe('when the recommended field is set', () => {
       it('marks a book as recommended if a true value is provided', () => {
         const lastYearsBooks = books.sections.get(2017)
