@@ -14,6 +14,8 @@ import {
   renderTemplate,
 } from './renderer.js'
 
+import { renderFeed } from './feedRenderer.js'
+
 const program = new Command()
 
 program
@@ -82,6 +84,25 @@ if (opts.styles) {
   copyFileSync(
     getStylePath(books.meta.theme),
     getOutputPath(opts.outputDir, 'styles.css'),
+  )
+}
+
+if (books.meta.feed) {
+  if (!opts.quiet) {
+    console.log(
+      `${colors.brightGreen(
+        '✔',
+      )} Writing JSON Feed files to output directory at ${colors.brightBlue(
+        opts.outputDir,
+      )}...`,
+    )
+  }
+
+  const renderedFeed = renderFeed(books)
+
+  writeFileSync(
+    getOutputPath(opts.outputDir, 'feed.json'),
+    JSON.stringify(renderedFeed),
   )
 }
 

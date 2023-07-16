@@ -26,6 +26,53 @@ const TEST_DATA = {
   ]),
 }
 
+const TEST_DATA_WITH_FEED = {
+  meta: {
+    name: 'Test Name',
+    feed: {
+      title: 'Test Feed',
+      url: 'http://www.feedtest.com',
+    },
+  },
+  years: new Set([2023]),
+  sections: new Map([
+    [
+      2023,
+      [
+        {
+          title: 'Test Title 1',
+          author: 'Test Author 1',
+          link: 'http://www.test.com',
+          year: '2023',
+        },
+      ],
+    ],
+  ]),
+}
+
+const TEST_DATA_WITH_FEED_WITHOUT_TITLE = {
+  meta: {
+    name: 'Test Name',
+    feed: {
+      url: 'http://www.feedtest.com',
+    },
+  },
+  years: new Set([2023]),
+  sections: new Map([
+    [
+      2023,
+      [
+        {
+          title: 'Test Title 1',
+          author: 'Test Author 1',
+          link: 'http://www.test.com',
+          year: '2023',
+        },
+      ],
+    ],
+  ]),
+}
+
 const TEST_DATA_WITH_MULTIPLE_YEARS = {
   meta: {
     name: 'Test Name',
@@ -139,6 +186,41 @@ describe('Render utils', () => {
     beforeEach(() => {
       const output = renderTemplate(TEMPLATE_PATH, TEST_DATA)
       $ = cheerio.load(output)
+    })
+
+    describe('when a feed config is not present', () => {
+      it('does not render the JSON feed link if a config is not present', () => {
+        expect($('link[rel="alternate"]').length).toBe(0)
+      })
+    })
+
+    describe('when a feed config is present', () => {
+      beforeEach(() => {
+        const output = renderTemplate(TEMPLATE_PATH, TEST_DATA_WITH_FEED)
+        $ = cheerio.load(output)
+      })
+
+      it('renders a link to the feed', () => {
+        const rel = $('link[rel="alternate"]')
+        expect(rel.length).toBe(1)
+        expect(rel.attr('title')).toBe('Test Feed')
+        expect(rel.attr('href')).toBe('http://www.feedtest.com')
+      })
+
+      describe('when the feed does not have a title', () => {
+        beforeEach(() => {
+          const output = renderTemplate(
+            TEMPLATE_PATH,
+            TEST_DATA_WITH_FEED_WITHOUT_TITLE,
+          )
+          $ = cheerio.load(output)
+        })
+
+        it('renders a link to the feed', () => {
+          const rel = $('link[rel="alternate"]')
+          expect(rel.attr('title')).toBe('JSON Feed')
+        })
+      })
     })
 
     describe('when rendering the header', () => {

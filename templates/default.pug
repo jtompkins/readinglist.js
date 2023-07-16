@@ -6,6 +6,9 @@ html(lang="en")
     title Reading List - #{meta.name}
     link(rel="stylesheet" href="styles.css")
 
+    if meta.feed
+      link(rel="alternate" title=meta.feed.title ? meta.feed.title : 'JSON Feed' type="application/feed+json" href=meta.feed.url)
+
   body
     .reading-list
       .gradient

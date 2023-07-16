@@ -3,7 +3,12 @@
     "name": "Test User",
     "email": "test@test.com",
     "website": "http://www.test.com",
-    "theme": "default"
+    "theme": "default",
+    "feed": {
+      "title": "Test Feed",
+      "url": "http://www.feedtest.com",
+      "avatarUrl": "http://www.feedtest.com/avatar.png"
+    }
   },
   "books": [
     {

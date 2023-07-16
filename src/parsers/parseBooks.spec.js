@@ -82,6 +82,7 @@ describe('parseBooks', () => {
       expect(books.meta.email).toBe('test@test.com')
       expect(books.meta.website).toBe('http://www.test.com')
       expect(books.meta.theme).toBe('default')
+      expect(books.meta).not.toHaveProperty('feed')
     })
 
     describe('when the input is not well-formed', () => {
@@ -99,8 +100,31 @@ describe('parseBooks', () => {
           ]
         }
       `
+
       it('throws when the TOML is missing required keys', () => {
-        expect(() => parseConfig(MISSING_REQUIRED_CONFIG_VALUES)).toThrow()
+        expect(() => parseBooks(MISSING_REQUIRED_CONFIG_VALUES)).toThrow()
+      })
+    })
+
+    describe('when a feed config is present', () => {
+      const FEED_CONFIG_PRESENT = `
+        {
+          "meta": {
+            "name": "Test User",
+            "feed": {
+              "title": "Test Feed",
+              "url": "http://www.feedtest.com",
+              "avatarUrl": "http://www.feedtest.com/avatar.png"
+            }
+          },
+          "books": []
+        }
+      `
+
+      it('parses the feed config', () => {
+        const parsedBooks = parseBooks(FEED_CONFIG_PRESENT)
+
+        expect(parsedBooks.meta).toHaveProperty('feed')
       })
     })
   })

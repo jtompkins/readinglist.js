@@ -9,6 +9,11 @@ const schema = Joi.object({
       email: Joi.string(),
       website: Joi.string(),
       theme: Joi.string().default('default'),
+      feed: Joi.object().keys({
+        title: Joi.string(),
+        url: Joi.string().required(),
+        avatarUrl: Joi.string(),
+      }),
     })
     .required(),
   books: Joi.array().items(
@@ -75,13 +80,23 @@ const parseBooks = (bookStr) => {
 
   const years = new Set(Array.from(sections.keys()).sort(reverseYearComparator))
 
+  const meta = {
+    name: value.meta.name,
+    email: value.meta.email,
+    website: value.meta.website,
+    theme: value.meta.theme,
+  }
+
+  if (value.meta.feed) {
+    meta.feed = {
+      title: value.meta.feed.title,
+      url: value.meta.feed.url,
+      avatarUrl: value.meta.feed.avatarUrl,
+    }
+  }
+
   return {
-    meta: {
-      name: value.meta.name,
-      email: value.meta.email,
-      website: value.meta.website,
-      theme: value.meta.theme,
-    },
+    meta,
     years,
     sections,
   }
