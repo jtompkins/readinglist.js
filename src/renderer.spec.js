@@ -50,29 +50,6 @@ const TEST_DATA_WITH_FEED = {
   ]),
 }
 
-const TEST_DATA_WITH_FEED_WITHOUT_TITLE = {
-  meta: {
-    name: 'Test Name',
-    feed: {
-      url: 'http://www.feedtest.com',
-    },
-  },
-  years: new Set([2023]),
-  sections: new Map([
-    [
-      2023,
-      [
-        {
-          title: 'Test Title 1',
-          author: 'Test Author 1',
-          link: 'http://www.test.com',
-          year: '2023',
-        },
-      ],
-    ],
-  ]),
-}
-
 const TEST_DATA_WITH_MULTIPLE_YEARS = {
   meta: {
     name: 'Test Name',
@@ -205,21 +182,6 @@ describe('Render utils', () => {
         expect(rel.length).toBe(1)
         expect(rel.attr('title')).toBe('Test Feed')
         expect(rel.attr('href')).toBe('http://www.feedtest.com')
-      })
-
-      describe('when the feed does not have a title', () => {
-        beforeEach(() => {
-          const output = renderTemplate(
-            TEMPLATE_PATH,
-            TEST_DATA_WITH_FEED_WITHOUT_TITLE,
-          )
-          $ = cheerio.load(output)
-        })
-
-        it('renders a link to the feed', () => {
-          const rel = $('link[rel="alternate"]')
-          expect(rel.attr('title')).toBe('JSON Feed')
-        })
       })
     })
 

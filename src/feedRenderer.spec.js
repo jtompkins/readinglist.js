@@ -64,28 +64,6 @@ const TEST_DATA = {
   ]),
 }
 
-const NO_TITLE_TEST_DATA = {
-  meta: {
-    name: 'Test Name',
-    feed: {
-      url: 'http://www.feedtest.com',
-      avatarUrl: 'http://www.feedtest.com/avatar.png',
-    },
-  },
-  sections: new Map([
-    [
-      2023,
-      [
-        {
-          title: 'No Link Book',
-          author: 'No Link Author',
-          year: '2023',
-        },
-      ],
-    ],
-  ]),
-}
-
 const NO_AVATAR_TEST_DATA = {
   meta: {
     name: 'Test Name',
@@ -132,16 +110,6 @@ describe('Feed Renderer', () => {
 
       it('outputs the items', () => {
         expect(feed.items.length).toBe(6)
-      })
-
-      describe('when there is no title configured', () => {
-        beforeEach(() => {
-          feed = renderFeed(NO_TITLE_TEST_DATA)
-        })
-
-        it('does not include the title in the output', () => {
-          expect(feed).not.toHaveProperty('title')
-        })
       })
 
       describe('when there is no avatar URL configured', () => {

@@ -3,10 +3,7 @@ const renderFeed = (context) => {
     version: 'https://jsonfeed.org/version/1.1',
     home_page_url: context.meta.website,
     feed_url: context.meta.feed.url,
-  }
-
-  if (context.meta.feed.title) {
-    feed.title = context.meta.feed.title
+    title: context.meta.feed.title,
   }
 
   if (context.meta.feed.avatarUrl) {

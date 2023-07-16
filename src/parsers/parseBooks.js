@@ -10,7 +10,7 @@ const schema = Joi.object({
       website: Joi.string(),
       theme: Joi.string().default('default'),
       feed: Joi.object().keys({
-        title: Joi.string(),
+        title: Joi.string().required(),
         url: Joi.string().required(),
         avatarUrl: Joi.string(),
       }),
