@@ -47,7 +47,7 @@ You can optionally have the generator also output a [JSON Feed](https://www.json
 | `url`       | The URL to your hosted JSON Feed output. Because this is used by feed readers for discovery, it must be a fully-qualified URL, and readinglist.js can't predict where you'll host the file, you have to provide it yourself.               |
 | `avatarUrl` | _(Optional)_ The URL to an icon that represents your feed. This URL is used by feed readers to display your feed, and must be a fully-qualified URL. See the [JSON Feed spec](https://www.jsonfeed.org/version/1.1/) for more information. |
 
-#### The `book` object
+### The `book` object
 
 The structure of the book object looks like this:
 
